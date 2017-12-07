@@ -1,4 +1,4 @@
-# Debian 8 (Jessie) Docker Image
+# Debian 9 (Stretch) Docker Image
 
 ## Description
 
@@ -9,4 +9,3 @@ This image provides a [Debian](https://www.debian.org/) based docker base image 
 ## Current Status: Work In Progress
 
 This image is currently an experimental work in progress.
-
