@@ -46,6 +46,7 @@ class Test1and1BaseImage(unittest.TestCase):
 
     def test_docker_logs(self):
         expected_log_lines = [
+            "run-parts: executing /hooks/entrypoint-pre.d/00_check_euid",
             "run-parts: executing /hooks/entrypoint-pre.d/01_ssmtp_setup",
             "run-parts: executing /hooks/entrypoint-pre.d/02_user_group_setup",
             "run-parts: executing /hooks/supervisord-pre.d/20_configurability"
