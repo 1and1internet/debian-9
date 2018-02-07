@@ -1,12 +1,7 @@
 #!/usr/bin/env python3
 
 import unittest
-import os
-import docker
 from testpack_helper_library.unittests.dockertests import Test1and1Common
-import json
-import subprocess
-from stat import *
 
 
 class Test1and1BaseImage(Test1and1Common):
