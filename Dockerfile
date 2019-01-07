@@ -38,6 +38,7 @@ ENV \
 	SMTP_USER="" \
 	SMTP_PASS="" \
 	SMTP_DOMAIN="" \
-	SMTP_RELAYHOST=""
+	SMTP_RELAYHOST="" \
+    ULIMIT_CORE=0
 ENTRYPOINT ["/bin/bash", "/init/entrypoint"]
 CMD ["/init/supervisord"]
