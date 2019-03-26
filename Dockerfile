@@ -21,7 +21,6 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
 	&& update-alternatives --install /usr/bin/supervisord supervisord /usr/bin/supervisorgo 1 \
 	&& rm /etc/apt/apt.conf.d/docker-no-languages \
 	&& debconf-set-selections -v /etc/debconf-preseed.txt \
-	&& mv /etc/apt/sources.list.d/backports.list /etc/apt/sources.list.d/.backports.list \
 	&& apt-get update \
 	&& apt-get upgrade \
 	&& apt-get install --no-install-recommends apt-utils debconf-utils \
