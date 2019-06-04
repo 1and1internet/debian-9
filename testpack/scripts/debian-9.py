@@ -15,7 +15,7 @@ class Test1and1BaseImage(Test1and1Common):
             "run-parts: executing /hooks/entrypoint-pre.d/02_user_group_setup",
             "run-parts: executing /hooks/supervisord-pre.d/20_configurability"
         ]
-        container_logs = self.container.logs().decode('utf-8')
+        container_logs = self.logs()
         for expected_log_line in expected_log_lines:
             self.assertTrue(
                 container_logs.find(expected_log_line) > -1,
@@ -23,22 +23,22 @@ class Test1and1BaseImage(Test1and1Common):
             )
 
     def test_OS(self):
-        lines = self.execRun("cat /etc/debian_version")
+        lines = self.exec("cat /etc/debian_version")
         self.assertTrue(lines.find("9.") > -1, msg="Failed to establish correct version")
 
     def test_id(self):
-        self.assertEqual("10000", self.execRun("whoami")[:-1])
+        self.assertEqual("10000", self.exec("whoami").strip())
 
     def test_supervisor(self):
         self.assertPackageIsInstalled("supervisor")
 
         self.assertTrue(
-            self.execRun("ps -ef").find('supervisord') > -1,
+            self.exec("ps -ef").find('supervisord') > -1,
             msg="supervisord not running"
         )
 
         self.assertFalse(
-            self.execRun("ls -l /etc/supervisor/supervisord.conf").find("No such file or directory") > -1,
+            self.exec("ls -l /etc/supervisor/supervisord.conf").find("No such file or directory") > -1,
             msg="/etc/supervisor/supervisord.conf is missing"
         )
 
@@ -53,7 +53,7 @@ class Test1and1BaseImage(Test1and1Common):
 
     def test_apt(self):
         self.assertTrue(
-            self.execRun("ls -l /var/lib/apt/lists").find("total 0") > -1,
+            self.exec("ls -l /var/lib/apt/lists").find("total 0") > -1,
             msg="/var/lib/apt/lists should be empty"
         )
 
