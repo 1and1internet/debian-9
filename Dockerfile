@@ -15,7 +15,7 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
 	&& debconf-set-selections -v /etc/debconf-preseed.txt \
 	&& apt-get update \
 	&& apt-get upgrade \
-	&& apt-get install --no-install-recommends apt-utils debconf-utils \
+	&& apt-get install --no-install-recommends apt-utils debconf-utils systemd \
 	&& apt-get install --no-install-recommends apt-transport-https ca-certificates \
 	&& apt-get install --no-install-recommends locales gettext-base ssmtp procps \
 	&& dpkg-reconfigure -f noninteractive tzdata \
