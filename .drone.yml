@@ -4,6 +4,7 @@ pipeline:
     when:
       event: push
     image: 1and1internet/template-library-tools
+    pull: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
