@@ -18,7 +18,6 @@ pipeline:
     image: 1and1internet/template-library-tools
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /secrets:~/.docker
     commands:
       - make --environment-overrides pull IMAGE_NAME=build-${CI_BUILD_NUMBER}-${CI_REPO#*/}/${CI_REPO#*/}
 
@@ -28,7 +27,6 @@ pipeline:
     image: 1and1internet/template-library-tools
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /secrets:~/.docker
     commands:
       - make --environment-overrides build IMAGE_NAME=build-${CI_BUILD_NUMBER}-${CI_REPO#*/}/${CI_REPO#*/}
 
