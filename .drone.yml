@@ -1,5 +1,15 @@
 ---
 pipeline:
+  pre_clean:
+    when:
+      event: push
+    image: 1and1internet/template-library-tools
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    commands:
+      - docker container prune -f || true
+      - docker image prune -f
+      - docker rmi -f $(docker images --format "{{.Repository}}:{{.Tag}}" | egrep -v 'none|template-library-tools|testpack-framework|git') || true
 
   build:
     when:
