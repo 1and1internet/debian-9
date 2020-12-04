@@ -75,4 +75,5 @@ pipeline:
       - /secrets:/secrets
     commands:
       - docker rm -f $(docker ps -a | grep -v "$${HOSTNAME}" | awk '{print $1}') || true
-      - docker rmi -f $(docker images -q | egrep -v 'docker|template-library-tools|testpack-framework|git') || true
+      - docker rmi -f $(docker images --format "{{.Repository}}:{{.Tag}}" | egrep -v 'docker|template-library-tools|testpack-framework|git') || true
+      - docker image prune -f
