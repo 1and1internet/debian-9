@@ -5,13 +5,21 @@ DOCKER_SOCKET = /var/run/docker.sock
 BUILD_ARGS = --rm
 TPACK_IMAGE = 1and1internet/testpack-framework
 
-all: build test
+all: pull build test
+
+pull:
+	##
+	## Pulling image updates from registry
+	##
+	for IMAGE in ${BASE_IMAGE} ${TPACK_IMAGE}; \
+		do docker pull $${IMAGE}; \
+	done
 
 build:
 	##
 	## Starting build of image ${IMAGE_NAME}
 	##
-	docker build --pull ${BUILD_ARGS} --tag ${IMAGE_NAME} .
+	docker build ${BUILD_ARGS} --tag ${IMAGE_NAME} .
 
 test:
 	docker run --rm -i -v ${DOCKER_SOCKET}:/var/run/docker.sock -v ${PWD}/:/mnt/ -e IMAGE_NAME=${IMAGE_NAME} ${TPACK_IMAGE}
